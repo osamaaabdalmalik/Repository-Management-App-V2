@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:rms/core/constants/app_enums.dart';
@@ -16,7 +17,6 @@ class AuthController extends GetxController {
   final GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
 
   String validationMessage = '';
-
 
   @override
   void onInit() async {

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:rms/core/constants/app_keys.dart';
+import 'package:rms/core/constants/app_themes.dart';
 import 'package:rms/intial_bindings.dart';
 import 'package:rms/core/constants/app_pages_routes.dart';
 import 'package:rms/core/constants/app_translations.dart';
@@ -11,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SharedPreferences pref = await SharedPreferences.getInstance();
   Get.put(pref);
+  initLang();
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
   //   DeviceOrientation.portraitDown,
@@ -18,8 +21,31 @@ void main() async {
   runApp(const MyApp());
 }
 
+void initLang() {
+  String? sharedPrefLang = Get.find<SharedPreferences>().getString(AppKeys.lang);
+  ThemeData appTheme = AppThemes.themeEnglish;
+  Locale language = const Locale("ar");
+  appTheme = AppThemes.themeEnglish;
+  if (sharedPrefLang == "ar") {
+    language = const Locale("ar");
+    appTheme = AppThemes.themeArabic;
+  } else if (sharedPrefLang == "en") {
+    language = const Locale("en");
+    appTheme = AppThemes.themeEnglish;
+  } else {
+    language = Locale(Get.deviceLocale!.languageCode);
+    if (Get.deviceLocale!.languageCode == "ar") {
+      appTheme = AppThemes.themeArabic;
+    } else if (Get.deviceLocale!.languageCode == "en") {
+      appTheme = AppThemes.themeEnglish;
+    }
+  }
+  Get.put(language);
+  Get.put(appTheme);
+  Get.find<SharedPreferences>().setString(AppKeys.lang, Get.deviceLocale!.languageCode);
+}
+
 class MyApp extends StatelessWidget {
-  // final MainController controller = Get.put(MainController());
 
   const MyApp({Key? key}) : super(key: key);
 
@@ -29,9 +55,9 @@ class MyApp extends StatelessWidget {
       builder: (_, __) => GetMaterialApp(
         title: 'Al Mutawasit',
         debugShowCheckedModeBanner: false,
-        // locale: controller.language,
+        locale: Get.find<Locale>(),
         translations: AppTranslations(),
-        // theme: controller.appTheme,
+        theme: Get.find<ThemeData>(),
         builder: EasyLoading.init(),
         initialBinding: InitialBindings(),
         getPages: AppPagesRoutes.appPages,
