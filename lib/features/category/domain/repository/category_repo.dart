@@ -10,6 +10,8 @@ abstract class CategoryRepo {
 
   Future<Either<Failure, Category>> getCategory({required int id});
 
+  Future<Either<Failure, Unit>> createCategory({required String name, File? photo});
+
   Future<Either<Failure, Unit>> updateCategory({
     required int id,
     required String name,

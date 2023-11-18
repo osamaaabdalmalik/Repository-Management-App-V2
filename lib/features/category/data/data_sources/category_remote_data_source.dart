@@ -19,6 +19,8 @@ abstract class CategoryRemoteDataSource {
     File? photo,
   });
 
+  Future<Unit> createCategory({required String name, File? photo});
+
   Future<Unit> deleteCategory({required int id});
 
   Future<List<RegisterModel>> getCategoryRegisters({required int id});
@@ -74,6 +76,27 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
     } catch (e) {
       Get.find<Logger>().e(
         "End `getCategory` in |CategoryRemoteDataSourceImpl| Exception: ${e.runtimeType}",
+      );
+      rethrow;
+    }
+  }
+  @override
+  Future<Unit> createCategory({required String name, File? photo}) async {
+    try {
+      Get.find<Logger>().i("Start `createCategory` in |CategoryRemoteDataSourceImpl|");
+      await apiService.postMultiPart(
+        subUrl: AppApiRoutes.addCategory,
+        data: {
+          'name': name,
+        },
+        file: photo,
+        fieldFileKey: 'photo',
+      );
+      Get.find<Logger>().f("End `createCategory` in |CategoryRemoteDataSourceImpl|");
+      return Future.value(unit);
+    } catch (e) {
+      Get.find<Logger>().e(
+        "End `createCategory` in |CategoryRemoteDataSourceImpl| Exception: ${e.runtimeType}",
       );
       rethrow;
     }

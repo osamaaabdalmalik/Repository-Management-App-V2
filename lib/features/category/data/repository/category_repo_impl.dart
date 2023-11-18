@@ -42,6 +42,22 @@ class CategoryRepoImpl implements CategoryRepo {
   }
 
   @override
+  Future<Either<Failure, Unit>> createCategory({required String name, File? photo}) async {
+    try {
+      Get.find<Logger>().i("Start `createCategory` in |CategoryRepoImpl|");
+      await categoryRemoteDataSource.createCategory(
+        name: name,
+        photo: photo,
+      );
+      Get.find<Logger>().f("End `createCategory` in |CategoryRepoImpl|");
+      return const Right(unit);
+    } catch (e) {
+      Get.find<Logger>().e("End `createCategory` in |CategoryRepoImpl| Exception: ${e.runtimeType}");
+      return Left(getFailureFromException(e));
+    }
+  }
+
+  @override
   Future<Either<Failure, Unit>> updateCategory({
     required int id,
     required String name,
