@@ -26,10 +26,4 @@ class CategoryModel extends Category {
       stocktaking: CategoryStocktakingModel.fromJson(json['stocktaking']),
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-    };
-  }
 }

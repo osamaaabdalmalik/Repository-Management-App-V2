@@ -6,21 +6,21 @@ import 'package:logger/logger.dart';
 import 'package:rms/core/errors/failures.dart';
 import 'package:rms/core/helpers/get_failure_from_exception.dart';
 import 'package:rms/features/category/data/data_sources/category_remote_data_source.dart';
-import 'package:rms/features/category/data/models/register_model.dart';
 import 'package:rms/features/category/domain/entities/category_entity.dart';
+import 'package:rms/features/category/domain/entities/register_entity.dart';
 import 'package:rms/features/category/domain/repository/category_repo.dart';
 
 class CategoryRepoImpl implements CategoryRepo {
   final CategoryRemoteDataSource categoryRemoteDataSource;
 
-  CategoryRepoImpl({required this.categoryRemoteDataSource});
+  const CategoryRepoImpl({required this.categoryRemoteDataSource});
 
   @override
   Future<Either<Failure, List<Category>>> getCategories({required int repositoryId}) async {
     try {
       Get.find<Logger>().i("Start `getCategories` in |CategoryRepoImpl|");
       var categoriesModels = await categoryRemoteDataSource.getCategories(repositoryId: repositoryId);
-      Get.find<Logger>().f("End `getCategories` in |CategoryRepoImpl| userModel");
+      Get.find<Logger>().f("End `getCategories` in |CategoryRepoImpl|");
       return Right(categoriesModels);
     } catch (e) {
       Get.find<Logger>().e("End `getCategories` in |CategoryRepoImpl| Exception: ${e.runtimeType}");
@@ -33,7 +33,7 @@ class CategoryRepoImpl implements CategoryRepo {
     try {
       Get.find<Logger>().i("Start `getCategory` in |CategoryRepoImpl|");
       var categoryModels = await categoryRemoteDataSource.getCategory(id: id);
-      Get.find<Logger>().f("End `getCategory` in |CategoryRepoImpl| userModel");
+      Get.find<Logger>().f("End `getCategory` in |CategoryRepoImpl|");
       return Right(categoryModels);
     } catch (e) {
       Get.find<Logger>().e("End `getCategory` in |CategoryRepoImpl| Exception: ${e.runtimeType}");
@@ -54,7 +54,7 @@ class CategoryRepoImpl implements CategoryRepo {
         name: name,
         photo: photo,
       );
-      Get.find<Logger>().f("End `updateCategory` in |CategoryRepoImpl| userModel");
+      Get.find<Logger>().f("End `updateCategory` in |CategoryRepoImpl|");
       return const Right(unit);
     } catch (e) {
       Get.find<Logger>().e("End `updateCategory` in |CategoryRepoImpl| Exception: ${e.runtimeType}");
@@ -67,7 +67,7 @@ class CategoryRepoImpl implements CategoryRepo {
     try {
       Get.find<Logger>().i("Start `deleteCategory` in |CategoryRepoImpl|");
       await categoryRemoteDataSource.deleteCategory(id: id);
-      Get.find<Logger>().f("End `deleteCategory` in |CategoryRepoImpl| userModel");
+      Get.find<Logger>().f("End `deleteCategory` in |CategoryRepoImpl|");
       return const Right(unit);
     } catch (e) {
       Get.find<Logger>().e("End `deleteCategory` in |CategoryRepoImpl| Exception: ${e.runtimeType}");
@@ -76,11 +76,11 @@ class CategoryRepoImpl implements CategoryRepo {
   }
 
   @override
-  Future<Either<Failure, List<RegisterModel>>> getCategoryRegisters({required int id}) async {
+  Future<Either<Failure, List<Register>>> getCategoryRegisters({required int id}) async {
     try {
       Get.find<Logger>().i("Start `getCategoryRegisters` in |CategoryRepoImpl|");
       var categoriesRegistersModels = await categoryRemoteDataSource.getCategoryRegisters(id: id);
-      Get.find<Logger>().f("End `getCategoryRegisters` in |CategoryRepoImpl| userModel");
+      Get.find<Logger>().f("End `getCategoryRegisters` in |CategoryRepoImpl|");
       return Right(categoriesRegistersModels);
     } catch (e) {
       Get.find<Logger>().e("End `getCategoryRegisters` in |CategoryRepoImpl| Exception: ${e.runtimeType}");
@@ -93,7 +93,7 @@ class CategoryRepoImpl implements CategoryRepo {
     try {
       Get.find<Logger>().i("Start `deleteCategoryRegister` in |CategoryRepoImpl|");
       await categoryRemoteDataSource.deleteCategoryRegister(id: id);
-      Get.find<Logger>().f("End `deleteCategoryRegister` in |CategoryRepoImpl| userModel");
+      Get.find<Logger>().f("End `deleteCategoryRegister` in |CategoryRepoImpl|");
       return const Right(unit);
     } catch (e) {
       Get.find<Logger>().e("End `deleteCategoryRegister` in |CategoryRepoImpl| Exception: ${e.runtimeType}");

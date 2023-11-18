@@ -27,7 +27,7 @@ abstract class CategoryRemoteDataSource {
 }
 
 class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
-  ApiService apiService;
+  final ApiService apiService;
 
   CategoryRemoteDataSourceImpl({required this.apiService});
 
@@ -67,7 +67,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
         subUrl: AppApiRoutes.getCategory,
         parameters: {'id': id.toString()},
       );
-      final CategoryModel category = CategoryModel.fromJson(mapData);
+      final CategoryModel category = CategoryModel.fromJson(mapData['data']);
 
       Get.find<Logger>().f("End `getCategory` in |CategoryRemoteDataSourceImpl|");
       return Future.value(category);
