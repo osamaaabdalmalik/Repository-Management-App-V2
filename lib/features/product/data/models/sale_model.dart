@@ -22,10 +22,10 @@ class SaleModel extends Sale {
       totalPurchasePrice: json['total_purchase_price'],
       productName: json['product']['name'],
       clientName: json['client']['name'],
-      invoiceNumber: json['sale_invoice']['number'],
+      invoiceNumber: json['sales_invoice']['number'],
       productId: json['product']['id'],
       clientId: json['client']['id'],
-      saleInvoiceId: json['sale_invoice']['id'],
+      saleInvoiceId: json['sales_invoice']['id'],
     );
   }
 

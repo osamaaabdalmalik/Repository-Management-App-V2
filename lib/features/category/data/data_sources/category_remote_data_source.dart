@@ -85,7 +85,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
     try {
       Get.find<Logger>().i("Start `createCategory` in |CategoryRemoteDataSourceImpl|");
       await apiService.postMultiPart(
-        subUrl: AppApiRoutes.addCategory,
+        subUrl: AppApiRoutes.createCategory,
         data: {
           'name': name,
         },

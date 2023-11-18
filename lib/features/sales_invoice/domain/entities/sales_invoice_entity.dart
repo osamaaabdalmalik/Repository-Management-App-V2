@@ -1,7 +1,7 @@
 import 'package:rms/features/product/domain/entities/sale_entity.dart';
-import 'package:rms/features/sale_invoice/data/models/sale_invoice_model.dart';
+import 'package:rms/features/sales_invoice/data/models/sales_invoice_model.dart';
 
-class SaleInvoice {
+class SalesInvoice {
   final int id;
   final int number;
   final double totalPrice;
@@ -13,7 +13,7 @@ class SaleInvoice {
   final int moneyOperationId;
   final List<Sale> sales;
 
-  const SaleInvoice({
+  const SalesInvoice({
     required this.id,
     required this.number,
     required this.totalPrice,
@@ -26,8 +26,8 @@ class SaleInvoice {
     required this.sales,
   });
 
-  SaleInvoiceModel toModel() {
-    return SaleInvoiceModel(
+  SalesInvoiceModel toModel() {
+    return SalesInvoiceModel(
       id: id,
       number: number,
       totalPrice: totalPrice,

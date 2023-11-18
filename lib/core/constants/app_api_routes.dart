@@ -13,7 +13,7 @@ abstract class AppApiRoutes {
   static const String updateProfile = "/auth/add_info";
 
   // Repository
-  static const String addRepository = "/repository/add_repository";
+  static const String createRepository = "/repository/add_repository";
   static const String joinToRepository = "/repository/join_repository";
   static const String updateRepository = "/repository/update_repository";
   static const String deleteRepository = "/repository/delete_repository";
@@ -25,7 +25,7 @@ abstract class AppApiRoutes {
   // Categories
   static const String getCategories = "/category/get_all_categories";
   static const String getCategory = "/category/get_category";
-  static const String addCategory = "/category/add_category";
+  static const String createCategory = "/category/add_category";
   static const String updateCategory = "/category/update_category";
   static const String deleteCategory = "/category/delete_category";
   static const String getCategoryRegisters = "/category/get_category_register";
@@ -34,7 +34,7 @@ abstract class AppApiRoutes {
   // Products
   static const String getProducts = "/product/get_all_products";
   static const String getProduct = "/product/get_product";
-  static const String addProduct = "/product/add_product";
+  static const String createProduct = "/product/add_product";
   static const String updateProduct = "/product/update_product";
   static const String deleteProduct = "/product/delete_product";
   static const String getProductRegisters = "/product/get_product_register";
@@ -43,7 +43,7 @@ abstract class AppApiRoutes {
   // Clients
   static const String getClients = "/client/get_all_clients";
   static const String getClient = "/client/get_client";
-  static const String addClient = "/client/add_client";
+  static const String createClient = "/client/add_client";
   static const String updateClient = "/client/update_client";
   static const String deleteClient = "/client/delete_client";
   static const String meetDebtClient = "/client/meet_debt";
@@ -57,11 +57,11 @@ abstract class AppApiRoutes {
   // Suppliers
   static const String getSuppliers = "/supplier/get_all_suppliers";
   static const String getSupplier = "/supplier/get_supplier";
-  static const String addSupplier = "/supplier/add_supplier";
+  static const String createSupplier = "/supplier/add_supplier";
   static const String updateSupplier = "/supplier/update_supplier";
   static const String deleteSupplier = "/supplier/delete_supplier";
   static const String meetDebtSupplier = "/supplier/meet_debt";
-  static const String addSupplierToArchives = "/supplier/add_to_archives_suppliers";
+  static const String createSupplierToArchives = "/supplier/add_to_archives_suppliers";
   static const String removeSupplierFromArchives = "/supplier/remove_to_archives_suppliers";
   static const String getArchivesSuppliers = "/supplier/get_archives_suppliers";
   static const String getArchiveSupplier = "/supplier/get_archive_supplier";
@@ -70,7 +70,7 @@ abstract class AppApiRoutes {
 
   // Expenses
   static const String getExpenses = "/expense/get_all_expenses";
-  static const String addExpense = "/expense/add_expense";
+  static const String createExpense = "/expense/add_expense";
   static const String updateExpense = "/expense/update_expense";
   static const String deleteExpense = "/expense/delete_expense";
   static const String meetDebtExpense = "/expense/meet_debt_expense";
@@ -90,7 +90,7 @@ abstract class AppApiRoutes {
   // Purchases Invoice
   static const String getPurchasesInvoices = "/purchase_invoice/get_all_purchases_invoices";
   static const String getPurchasesInvoice = "/purchase_invoice/get_purchase_invoice";
-  static const String addPurchasesInvoice = "/purchase_invoice/add_purchase_invoice";
+  static const String createPurchasesInvoice = "/purchase_invoice/add_purchase_invoice";
   static const String updatePurchasesInvoice = "/purchase_invoice/update_purchase_invoice";
   static const String deletePurchasesInvoice = "/purchase_invoice/delete_purchase_invoice";
   static const String meetDebtPurchasesInvoice = "/purchase_invoice/meet_debt_purchase_invoice";
@@ -106,20 +106,20 @@ abstract class AppApiRoutes {
 
 
   // Sales Invoice
-  static const String getSalesInvoices = "/sale_invoice/get_all_sales_invoices";
-  static const String getSalesInvoice = "/sale_invoice/get_sale_invoice";
-  static const String addSalesInvoice = "/sale_invoice/add_sale_invoice";
-  static const String updateSalesInvoice = "/sale_invoice/update_sale_invoice";
-  static const String deleteSalesInvoice = "/sale_invoice/delete_sale_invoice";
-  static const String meetDebtSalesInvoice = "/sale_invoice/meet_debt_sale_invoice";
+  static const String getSalesInvoices = "/sales_invoice/get_all_sales_invoices";
+  static const String getSalesInvoice = "/sales_invoice/get_sales_invoice";
+  static const String createSalesInvoice = "/sales_invoice/add_sales_invoice";
+  static const String updateSalesInvoice = "/sales_invoice/update_sales_invoice";
+  static const String deleteSalesInvoice = "/sales_invoice/delete_sales_invoice";
+  static const String meetDebtSalesInvoice = "/sales_invoice/meet_debt_sales_invoice";
 
-  static const String getSalesInvoicesBetween = "/sale_invoice/get_sale_invoices_between_tow_date";
-  static const String getSalesInvoicesArchive = "/sale_invoice/get_archives_sales_invoices";
-  static const String getSalesInvoiceArchive = "/sale_invoice/get_archive_sales_invoice";
-  static const String addSalesInvoiceToArchive = "/sale_invoice/add_to_archives_sale_invoice";
-  static const String removeSalesInvoiceFromArchive = "/sale_invoice/remove_to_archives_sale_invoice";
-  static const String getSalesInvoiceRegisters = "/sale_invoice/get_sale_invoice_register";
-  static const String deleteSalesInvoiceRegister = "/sale_invoice/delete_sale_invoice_register";
+  static const String getSalesInvoicesBetween = "/sales_invoice/get_sales_invoices_between_tow_date";
+  static const String getSalesInvoicesArchive = "/sales_invoice/get_archives_sales_invoices";
+  static const String getSalesInvoiceArchive = "/sales_invoice/get_archive_sales_invoice";
+  static const String addSalesInvoiceToArchive = "/sales_invoice/add_to_archives_sales_invoice";
+  static const String removeSalesInvoiceFromArchive = "/sales_invoice/remove_to_archives_sales_invoice";
+  static const String getSalesInvoiceRegisters = "/sales_invoice/get_sales_invoice_register";
+  static const String deleteSalesInvoiceRegister = "/sales_invoice/delete_sales_invoice_register";
 
 
   // Stocktaking Page

@@ -1,6 +1,6 @@
 import 'package:rms/features/client/domain/entities/client_details_entity.dart';
 import 'package:rms/features/product/data/models/sale_model.dart';
-import 'package:rms/features/sale_invoice/data/models/sale_invoice_model.dart';
+import 'package:rms/features/sales_invoice/data/models/sales_invoice_model.dart';
 
 class ClientDetailsModel extends ClientDetails {
   const ClientDetailsModel({
@@ -15,9 +15,9 @@ class ClientDetailsModel extends ClientDetails {
             (item) => SaleModel.fromJson(item),
           )
           .toList(),
-      saleInvoices: json['sale_invoices']
-          .map<SaleInvoiceModel>(
-            (item) => SaleInvoiceModel.fromJson(item),
+      saleInvoices: json['sales_invoices']
+          .map<SalesInvoiceModel>(
+            (item) => SalesInvoiceModel.fromJson(item),
           )
           .toList(),
     );

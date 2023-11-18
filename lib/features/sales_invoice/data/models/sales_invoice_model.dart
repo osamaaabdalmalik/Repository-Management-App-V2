@@ -1,8 +1,8 @@
 import 'package:rms/features/product/data/models/sale_model.dart';
-import 'package:rms/features/sale_invoice/domain/entities/sale_invoice_entity.dart';
+import 'package:rms/features/sales_invoice/domain/entities/sales_invoice_entity.dart';
 
-class SaleInvoiceModel extends SaleInvoice {
-  const SaleInvoiceModel({
+class SalesInvoiceModel extends SalesInvoice {
+  const SalesInvoiceModel({
     required super.id,
     required super.number,
     required super.totalPrice,
@@ -15,8 +15,8 @@ class SaleInvoiceModel extends SaleInvoice {
     required super.sales,
   });
 
-  factory SaleInvoiceModel.fromJson(Map<String, dynamic> json) {
-    return SaleInvoiceModel(
+  factory SalesInvoiceModel.fromJson(Map<String, dynamic> json) {
+    return SalesInvoiceModel(
       id: json['id'],
       number: json['number'],
       totalPrice: json['total_price'],
@@ -32,5 +32,15 @@ class SaleInvoiceModel extends SaleInvoice {
           )
           .toList(),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'number': number,
+      'total_price': totalPrice,
+      'paid': paid,
+      'remained': remained,
+    };
   }
 }

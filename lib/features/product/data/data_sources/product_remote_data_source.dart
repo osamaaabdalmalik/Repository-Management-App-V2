@@ -82,7 +82,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
     try {
       Get.find<Logger>().i("Start `createProduct` in |ProductRemoteDataSourceImpl|");
       await apiService.postMultiPart(
-        subUrl: AppApiRoutes.addProduct,
+        subUrl: AppApiRoutes.createProduct,
         data: productModel.toJson(),
         file: photo,
         fieldFileKey: 'photo',

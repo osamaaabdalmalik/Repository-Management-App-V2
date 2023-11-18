@@ -140,7 +140,7 @@ class ClientRemoteDataSourceImpl extends ClientRemoteDataSource {
     try {
       Get.find<Logger>().i("Start `createClient` in |ClientRemoteDataSourceImpl|");
       await apiService.postMultiPart(
-        subUrl: AppApiRoutes.addClient,
+        subUrl: AppApiRoutes.createClient,
         data: clientModel.toJson(),
         file: photo,
         fieldFileKey: 'photo',
@@ -267,7 +267,7 @@ class ClientRemoteDataSourceImpl extends ClientRemoteDataSource {
       return Future.value(unit);
     } catch (e) {
       Get.find<Logger>().e(
-        "End `addClientToArchive` in |ClientRemoteDataSourceImpl| Exception: ${e.runtimeType}",
+        "End `addClientToArchive` increateClientToArchivesourceImpl| Exception: ${e.runtimeType}",
       );
       rethrow;
     }
