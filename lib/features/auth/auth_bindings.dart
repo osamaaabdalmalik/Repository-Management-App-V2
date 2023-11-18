@@ -15,7 +15,6 @@ class AuthBindings extends Bindings {
     Get.put<AuthRepo>(AuthRepoImpl(
       authRemoteDataSource: Get.find(),
       authLocalDataSource: Get.find(),
-      apiService: Get.find(),
     ));
     Get.put(SignInUseCase(Get.find()));
     Get.put(AuthController());

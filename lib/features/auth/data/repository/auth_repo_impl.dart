@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:rms/core/errors/failures.dart';
 import 'package:rms/core/helpers/get_failure_from_exception.dart';
-import 'package:rms/core/services/api_service.dart';
 import 'package:rms/features/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:rms/features/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:rms/features/auth/data/models/auth_model.dart';
@@ -15,25 +14,17 @@ import 'package:rms/features/auth/domain/repository/auth_repo.dart';
 class AuthRepoImpl implements AuthRepo {
   final AuthLocalDataSource authLocalDataSource;
   final AuthRemoteDataSource authRemoteDataSource;
-  final ApiService apiService;
 
-  AuthRepoImpl({
-    required this.authRemoteDataSource,
-    required this.authLocalDataSource,
-    required this.apiService,
-  });
+  AuthRepoImpl({required this.authRemoteDataSource, required this.authLocalDataSource});
 
   @override
   Future<Either<Failure, User>> signIn(SignIn signIn) async {
     Get.find<Logger>().i("Start `signIn` in |AuthRepoImpl|");
     try {
       final AuthModel authModel = await authRemoteDataSource.signIn(signIn.toModel());
-      Get.find<Logger>().f(
-        "End `signIn` in |AuthRepoImpl| userModel:${authModel.userModel.toJson()} \ntokensModel:${authModel.tokensModel.toJson()}",
-      );
+      Get.find<Logger>().f("End `signIn` in |AuthRepoImpl|");
       await authLocalDataSource.setUser(authModel.userModel);
       await authLocalDataSource.setTokens(authModel.tokensModel);
-      await apiService.onInit();
       return Right(authModel.userModel);
     } catch (e) {
       Get.find<Logger>().e("End `signIn` in |AuthRepoImpl| Exception: ${e.runtimeType}");
@@ -46,7 +37,7 @@ class AuthRepoImpl implements AuthRepo {
     Get.find<Logger>().i("Start `getUser` in |AuthRepoImpl|");
     try {
       final UserModel? userModel = authLocalDataSource.getUser();
-      Get.find<Logger>().f("End `getUser` in |AuthRepoImpl| userModel:${userModel?.toJson()}");
+      Get.find<Logger>().f("End `getUser` in |AuthRepoImpl|");
       return Right(userModel);
     } catch (e) {
       Get.find<Logger>().e("End `getUser` in |AuthRepoImpl| Exception: ${e.runtimeType}");
