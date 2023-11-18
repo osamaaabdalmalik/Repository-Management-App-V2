@@ -10,6 +10,8 @@ abstract class CategoryRepo {
 
   Future<Either<Failure, Category>> getCategory({required int id});
 
+  Future<Either<Failure, List<Register>>> getCategoryRegisters({required int id});
+
   Future<Either<Failure, Unit>> createCategory({required String name, File? photo});
 
   Future<Either<Failure, Unit>> updateCategory({
@@ -19,8 +21,6 @@ abstract class CategoryRepo {
   });
 
   Future<Either<Failure, Unit>> deleteCategory({required int id});
-
-  Future<Either<Failure, List<Register>>> getCategoryRegisters({required int id});
 
   Future<Either<Failure, Unit>> deleteCategoryRegister({required int id});
 }

@@ -42,6 +42,19 @@ class CategoryRepoImpl implements CategoryRepo {
   }
 
   @override
+  Future<Either<Failure, List<Register>>> getCategoryRegisters({required int id}) async {
+    try {
+      Get.find<Logger>().i("Start `getCategoryRegisters` in |CategoryRepoImpl|");
+      var categoriesRegistersModels = await categoryRemoteDataSource.getCategoryRegisters(id: id);
+      Get.find<Logger>().f("End `getCategoryRegisters` in |CategoryRepoImpl|");
+      return Right(categoriesRegistersModels);
+    } catch (e) {
+      Get.find<Logger>().e("End `getCategoryRegisters` in |CategoryRepoImpl| Exception: ${e.runtimeType}");
+      return Left(getFailureFromException(e));
+    }
+  }
+
+  @override
   Future<Either<Failure, Unit>> createCategory({required String name, File? photo}) async {
     try {
       Get.find<Logger>().i("Start `createCategory` in |CategoryRepoImpl|");
@@ -87,19 +100,6 @@ class CategoryRepoImpl implements CategoryRepo {
       return const Right(unit);
     } catch (e) {
       Get.find<Logger>().e("End `deleteCategory` in |CategoryRepoImpl| Exception: ${e.runtimeType}");
-      return Left(getFailureFromException(e));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Register>>> getCategoryRegisters({required int id}) async {
-    try {
-      Get.find<Logger>().i("Start `getCategoryRegisters` in |CategoryRepoImpl|");
-      var categoriesRegistersModels = await categoryRemoteDataSource.getCategoryRegisters(id: id);
-      Get.find<Logger>().f("End `getCategoryRegisters` in |CategoryRepoImpl|");
-      return Right(categoriesRegistersModels);
-    } catch (e) {
-      Get.find<Logger>().e("End `getCategoryRegisters` in |CategoryRepoImpl| Exception: ${e.runtimeType}");
       return Left(getFailureFromException(e));
     }
   }

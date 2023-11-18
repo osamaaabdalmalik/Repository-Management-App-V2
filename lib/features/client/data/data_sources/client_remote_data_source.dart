@@ -136,6 +136,29 @@ class ClientRemoteDataSourceImpl extends ClientRemoteDataSource {
   }
 
   @override
+  Future<List<RegisterModel>> getClientRegisters({required int id}) async {
+    try {
+      Get.find<Logger>().i("Start `getClientRegisters` in |ClientRemoteDataSourceImpl|");
+      Map<String, dynamic> mapData = await apiService.get(
+        subUrl: AppApiRoutes.getClientRegisters,
+        parameters: {'id': id.toString()},
+      );
+      final List<RegisterModel> registers = mapData['data']
+          .map<RegisterModel>(
+            (item) => RegisterModel.fromJson(item),
+          )
+          .toList();
+      Get.find<Logger>().f("End `getClientRegisters` in |ClientRemoteDataSourceImpl|");
+      return Future.value(registers);
+    } catch (e) {
+      Get.find<Logger>().e(
+        "End `getClientRegisters` in |ClientRemoteDataSourceImpl| Exception: ${e.runtimeType}",
+      );
+      rethrow;
+    }
+  }
+
+  @override
   Future<Unit> createClient({required ClientModel clientModel, File? photo}) async {
     try {
       Get.find<Logger>().i("Start `createClient` in |ClientRemoteDataSourceImpl|");
@@ -188,29 +211,6 @@ class ClientRemoteDataSourceImpl extends ClientRemoteDataSource {
     } catch (e) {
       Get.find<Logger>().e(
         "End `deleteClient` in |ClientRemoteDataSourceImpl| Exception: ${e.runtimeType}",
-      );
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<RegisterModel>> getClientRegisters({required int id}) async {
-    try {
-      Get.find<Logger>().i("Start `getClientRegisters` in |ClientRemoteDataSourceImpl|");
-      Map<String, dynamic> mapData = await apiService.get(
-        subUrl: AppApiRoutes.getClientRegisters,
-        parameters: {'id': id.toString()},
-      );
-      final List<RegisterModel> registers = mapData['data']
-          .map<RegisterModel>(
-            (item) => RegisterModel.fromJson(item),
-          )
-          .toList();
-      Get.find<Logger>().f("End `getClientRegisters` in |ClientRemoteDataSourceImpl|");
-      return Future.value(registers);
-    } catch (e) {
-      Get.find<Logger>().e(
-        "End `getClientRegisters` in |ClientRemoteDataSourceImpl| Exception: ${e.runtimeType}",
       );
       rethrow;
     }

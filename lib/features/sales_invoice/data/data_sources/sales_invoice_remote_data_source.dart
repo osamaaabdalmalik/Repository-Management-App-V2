@@ -15,13 +15,13 @@ abstract class SalesInvoiceRemoteDataSource {
 
   Future<SalesInvoiceModel> getSalesInvoiceArchive({required int id});
 
+  Future<List<RegisterModel>> getSalesInvoiceRegisters({required int id});
+
   Future<Unit> createSalesInvoice({required SalesInvoiceModel salesInvoiceModel});
 
   Future<Unit> updateSalesInvoice({required SalesInvoiceModel salesInvoiceModel});
 
   Future<Unit> deleteSalesInvoice({required int id});
-
-  Future<List<RegisterModel>> getSalesInvoiceRegisters({required int id});
 
   Future<Unit> deleteSalesInvoiceRegister({required int id});
 
@@ -134,6 +134,29 @@ class SalesInvoiceRemoteDataSourceImpl extends SalesInvoiceRemoteDataSource {
   }
 
   @override
+  Future<List<RegisterModel>> getSalesInvoiceRegisters({required int id}) async {
+    try {
+      Get.find<Logger>().i("Start `getSalesInvoiceRegisters` in |SalesInvoiceRemoteDataSourceImpl|");
+      Map<String, dynamic> mapData = await apiService.get(
+        subUrl: AppApiRoutes.getSalesInvoiceRegisters,
+        parameters: {'id': id.toString()},
+      );
+      final List<RegisterModel> registers = mapData['data']
+          .map<RegisterModel>(
+            (item) => RegisterModel.fromJson(item),
+          )
+          .toList();
+      Get.find<Logger>().f("End `getSalesInvoiceRegisters` in |SalesInvoiceRemoteDataSourceImpl|");
+      return Future.value(registers);
+    } catch (e) {
+      Get.find<Logger>().e(
+        "End `getSalesInvoiceRegisters` in |SalesInvoiceRemoteDataSourceImpl| Exception: ${e.runtimeType}",
+      );
+      rethrow;
+    }
+  }
+
+  @override
   Future<Unit> createSalesInvoice({required SalesInvoiceModel salesInvoiceModel}) async {
     try {
       Get.find<Logger>().i("Start `createSalesInvoice` in |SalesInvoiceRemoteDataSourceImpl|");
@@ -182,29 +205,6 @@ class SalesInvoiceRemoteDataSourceImpl extends SalesInvoiceRemoteDataSource {
     } catch (e) {
       Get.find<Logger>().e(
         "End `deleteSalesInvoice` in |SalesInvoiceRemoteDataSourceImpl| Exception: ${e.runtimeType}",
-      );
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<RegisterModel>> getSalesInvoiceRegisters({required int id}) async {
-    try {
-      Get.find<Logger>().i("Start `getSalesInvoiceRegisters` in |SalesInvoiceRemoteDataSourceImpl|");
-      Map<String, dynamic> mapData = await apiService.get(
-        subUrl: AppApiRoutes.getSalesInvoiceRegisters,
-        parameters: {'id': id.toString()},
-      );
-      final List<RegisterModel> registers = mapData['data']
-          .map<RegisterModel>(
-            (item) => RegisterModel.fromJson(item),
-          )
-          .toList();
-      Get.find<Logger>().f("End `getSalesInvoiceRegisters` in |SalesInvoiceRemoteDataSourceImpl|");
-      return Future.value(registers);
-    } catch (e) {
-      Get.find<Logger>().e(
-        "End `getSalesInvoiceRegisters` in |SalesInvoiceRemoteDataSourceImpl| Exception: ${e.runtimeType}",
       );
       rethrow;
     }

@@ -42,6 +42,19 @@ class ProductRepoImpl implements ProductRepo {
   }
 
   @override
+  Future<Either<Failure, List<Register>>> getProductRegisters({required int id}) async {
+    try {
+      Get.find<Logger>().i("Start `getProductRegisters` in |ProductRepoImpl|");
+      var productsRegistersModels = await productRemoteDataSource.getProductRegisters(id: id);
+      Get.find<Logger>().f("End `getProductRegisters` in |ProductRepoImpl|");
+      return Right(productsRegistersModels);
+    } catch (e) {
+      Get.find<Logger>().e("End `getProductRegisters` in |ProductRepoImpl| Exception: ${e.runtimeType}");
+      return Left(getFailureFromException(e));
+    }
+  }
+
+  @override
   Future<Either<Failure, Unit>> createProduct({required Product product, File? photo}) async {
     try {
       Get.find<Logger>().i("Start `createProduct` in |ProductRepoImpl|");
@@ -82,19 +95,6 @@ class ProductRepoImpl implements ProductRepo {
       return const Right(unit);
     } catch (e) {
       Get.find<Logger>().e("End `deleteProduct` in |ProductRepoImpl| Exception: ${e.runtimeType}");
-      return Left(getFailureFromException(e));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Register>>> getProductRegisters({required int id}) async {
-    try {
-      Get.find<Logger>().i("Start `getProductRegisters` in |ProductRepoImpl|");
-      var productsRegistersModels = await productRemoteDataSource.getProductRegisters(id: id);
-      Get.find<Logger>().f("End `getProductRegisters` in |ProductRepoImpl|");
-      return Right(productsRegistersModels);
-    } catch (e) {
-      Get.find<Logger>().e("End `getProductRegisters` in |ProductRepoImpl| Exception: ${e.runtimeType}");
       return Left(getFailureFromException(e));
     }
   }

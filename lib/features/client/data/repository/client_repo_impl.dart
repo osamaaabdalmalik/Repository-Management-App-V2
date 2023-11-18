@@ -68,6 +68,19 @@ class ClientRepoImpl implements ClientRepo {
   }
 
   @override
+  Future<Either<Failure, List<Register>>> getClientRegisters({required int id}) async {
+    try {
+      Get.find<Logger>().i("Start `getClientRegisters` in |ClientRepoImpl|");
+      var clientsRegistersModels = await clientRemoteDataSource.getClientRegisters(id: id);
+      Get.find<Logger>().f("End `getClientRegisters` in |ClientRepoImpl|");
+      return Right(clientsRegistersModels);
+    } catch (e) {
+      Get.find<Logger>().e("End `getClientRegisters` in |ClientRepoImpl| Exception: ${e.runtimeType}");
+      return Left(getFailureFromException(e));
+    }
+  }
+
+  @override
   Future<Either<Failure, Unit>> createClient({required Client client, File? photo}) async {
     try {
       Get.find<Logger>().i("Start `createClient` in |ClientRepoImpl|");
@@ -113,19 +126,6 @@ class ClientRepoImpl implements ClientRepo {
   }
 
   @override
-  Future<Either<Failure, List<Register>>> getClientRegisters({required int id}) async {
-    try {
-      Get.find<Logger>().i("Start `getClientRegisters` in |ClientRepoImpl|");
-      var clientsRegistersModels = await clientRemoteDataSource.getClientRegisters(id: id);
-      Get.find<Logger>().f("End `getClientRegisters` in |ClientRepoImpl|");
-      return Right(clientsRegistersModels);
-    } catch (e) {
-      Get.find<Logger>().e("End `getClientRegisters` in |ClientRepoImpl| Exception: ${e.runtimeType}");
-      return Left(getFailureFromException(e));
-    }
-  }
-
-  @override
   Future<Either<Failure, Unit>> deleteClientRegister({required int id}) async {
     try {
       Get.find<Logger>().i("Start `deleteClientRegister` in |ClientRepoImpl|");
@@ -142,7 +142,7 @@ class ClientRepoImpl implements ClientRepo {
   Future<Either<Failure, Unit>> meetDebtClient({required int id, required double payment}) async {
     try {
       Get.find<Logger>().i("Start `deleteClientRegister` in |ClientRepoImpl|");
-      await clientRemoteDataSource.meetDebtClient(id: id,payment: payment);
+      await clientRemoteDataSource.meetDebtClient(id: id, payment: payment);
       Get.find<Logger>().f("End `deleteClientRegister` in |ClientRepoImpl|");
       return const Right(unit);
     } catch (e) {

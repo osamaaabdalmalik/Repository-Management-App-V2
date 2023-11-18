@@ -13,6 +13,8 @@ abstract class CategoryRemoteDataSource {
 
   Future<CategoryModel> getCategory({required int id});
 
+  Future<List<RegisterModel>> getCategoryRegisters({required int id});
+
   Future<Unit> updateCategory({
     required int id,
     required String name,
@@ -22,8 +24,6 @@ abstract class CategoryRemoteDataSource {
   Future<Unit> createCategory({required String name, File? photo});
 
   Future<Unit> deleteCategory({required int id});
-
-  Future<List<RegisterModel>> getCategoryRegisters({required int id});
 
   Future<Unit> deleteCategoryRegister({required int id});
 }
@@ -80,6 +80,30 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
       rethrow;
     }
   }
+
+  @override
+  Future<List<RegisterModel>> getCategoryRegisters({required int id}) async {
+    try {
+      Get.find<Logger>().i("Start `getCategoryRegisters` in |CategoryRemoteDataSourceImpl|");
+      Map<String, dynamic> mapData = await apiService.get(
+        subUrl: AppApiRoutes.getCategoryRegisters,
+        parameters: {'id': id.toString()},
+      );
+      final List<RegisterModel> registers = mapData['data']
+          .map<RegisterModel>(
+            (item) => RegisterModel.fromJson(item),
+          )
+          .toList();
+      Get.find<Logger>().f("End `getCategoryRegisters` in |CategoryRemoteDataSourceImpl|");
+      return Future.value(registers);
+    } catch (e) {
+      Get.find<Logger>().e(
+        "End `getCategoryRegisters` in |CategoryRemoteDataSourceImpl| Exception: ${e.runtimeType}",
+      );
+      rethrow;
+    }
+  }
+
   @override
   Future<Unit> createCategory({required String name, File? photo}) async {
     try {
@@ -142,29 +166,6 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
     } catch (e) {
       Get.find<Logger>().e(
         "End `deleteCategory` in |CategoryRemoteDataSourceImpl| Exception: ${e.runtimeType}",
-      );
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<RegisterModel>> getCategoryRegisters({required int id}) async {
-    try {
-      Get.find<Logger>().i("Start `getCategoryRegisters` in |CategoryRemoteDataSourceImpl|");
-      Map<String, dynamic> mapData = await apiService.get(
-        subUrl: AppApiRoutes.getCategoryRegisters,
-        parameters: {'id': id.toString()},
-      );
-      final List<RegisterModel> registers = mapData['data']
-          .map<RegisterModel>(
-            (item) => RegisterModel.fromJson(item),
-          )
-          .toList();
-      Get.find<Logger>().f("End `getCategoryRegisters` in |CategoryRemoteDataSourceImpl|");
-      return Future.value(registers);
-    } catch (e) {
-      Get.find<Logger>().e(
-        "End `getCategoryRegisters` in |CategoryRemoteDataSourceImpl| Exception: ${e.runtimeType}",
       );
       rethrow;
     }

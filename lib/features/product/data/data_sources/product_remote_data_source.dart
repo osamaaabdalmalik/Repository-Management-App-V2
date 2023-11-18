@@ -13,13 +13,13 @@ abstract class ProductRemoteDataSource {
 
   Future<ProductModel> getProduct({required int id});
 
+  Future<List<RegisterModel>> getProductRegisters({required int id});
+
   Future<Unit> createProduct({required ProductModel productModel, File? photo});
 
   Future<Unit> updateProduct({required ProductModel productModel, File? photo});
 
   Future<Unit> deleteProduct({required int id});
-
-  Future<List<RegisterModel>> getProductRegisters({required int id});
 
   Future<Unit> deleteProductRegister({required int id});
 }
@@ -78,6 +78,29 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   }
 
   @override
+  Future<List<RegisterModel>> getProductRegisters({required int id}) async {
+    try {
+      Get.find<Logger>().i("Start `getProductRegisters` in |ProductRemoteDataSourceImpl|");
+      Map<String, dynamic> mapData = await apiService.get(
+        subUrl: AppApiRoutes.getProductRegisters,
+        parameters: {'id': id.toString()},
+      );
+      final List<RegisterModel> registers = mapData['data']
+          .map<RegisterModel>(
+            (item) => RegisterModel.fromJson(item),
+          )
+          .toList();
+      Get.find<Logger>().f("End `getProductRegisters` in |ProductRemoteDataSourceImpl|");
+      return Future.value(registers);
+    } catch (e) {
+      Get.find<Logger>().e(
+        "End `getProductRegisters` in |ProductRemoteDataSourceImpl| Exception: ${e.runtimeType}",
+      );
+      rethrow;
+    }
+  }
+
+  @override
   Future<Unit> createProduct({required ProductModel productModel, File? photo}) async {
     try {
       Get.find<Logger>().i("Start `createProduct` in |ProductRemoteDataSourceImpl|");
@@ -130,29 +153,6 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
     } catch (e) {
       Get.find<Logger>().e(
         "End `deleteProduct` in |ProductRemoteDataSourceImpl| Exception: ${e.runtimeType}",
-      );
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<RegisterModel>> getProductRegisters({required int id}) async {
-    try {
-      Get.find<Logger>().i("Start `getProductRegisters` in |ProductRemoteDataSourceImpl|");
-      Map<String, dynamic> mapData = await apiService.get(
-        subUrl: AppApiRoutes.getProductRegisters,
-        parameters: {'id': id.toString()},
-      );
-      final List<RegisterModel> registers = mapData['data']
-          .map<RegisterModel>(
-            (item) => RegisterModel.fromJson(item),
-          )
-          .toList();
-      Get.find<Logger>().f("End `getProductRegisters` in |ProductRemoteDataSourceImpl|");
-      return Future.value(registers);
-    } catch (e) {
-      Get.find<Logger>().e(
-        "End `getProductRegisters` in |ProductRemoteDataSourceImpl| Exception: ${e.runtimeType}",
       );
       rethrow;
     }
