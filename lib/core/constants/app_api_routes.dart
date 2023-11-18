@@ -61,7 +61,7 @@ abstract class AppApiRoutes {
   static const String updateSupplier = "/supplier/update_supplier";
   static const String deleteSupplier = "/supplier/delete_supplier";
   static const String meetDebtSupplier = "/supplier/meet_debt";
-  static const String createSupplierToArchives = "/supplier/add_to_archives_suppliers";
+  static const String addSupplierToArchives = "/supplier/add_to_archives_suppliers";
   static const String removeSupplierFromArchives = "/supplier/remove_to_archives_suppliers";
   static const String getArchivesSuppliers = "/supplier/get_archives_suppliers";
   static const String getArchiveSupplier = "/supplier/get_archive_supplier";
