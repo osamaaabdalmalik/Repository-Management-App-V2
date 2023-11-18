@@ -42,6 +42,22 @@ class ProductRepoImpl implements ProductRepo {
   }
 
   @override
+  Future<Either<Failure, Unit>> createProduct({required Product product, File? photo}) async {
+    try {
+      Get.find<Logger>().i("Start `createProduct` in |ProductRepoImpl|");
+      await productRemoteDataSource.createProduct(
+        productModel: product.toModel(),
+        photo: photo,
+      );
+      Get.find<Logger>().f("End `createProduct` in |ProductRepoImpl|");
+      return const Right(unit);
+    } catch (e) {
+      Get.find<Logger>().e("End `createProduct` in |ProductRepoImpl| Exception: ${e.runtimeType}");
+      return Left(getFailureFromException(e));
+    }
+  }
+
+  @override
   Future<Either<Failure, Unit>> updateProduct({required Product product, File? photo}) async {
     try {
       Get.find<Logger>().i("Start `updateProduct` in |ProductRepoImpl|");

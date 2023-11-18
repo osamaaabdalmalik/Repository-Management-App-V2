@@ -10,6 +10,8 @@ abstract class ProductRepo {
 
   Future<Either<Failure, Product>> getProduct({required int id});
 
+  Future<Either<Failure, Unit>> createProduct({required Product product, File? photo});
+
   Future<Either<Failure, Unit>> updateProduct({required Product product, File? photo});
 
   Future<Either<Failure, Unit>> deleteProduct({required int id});

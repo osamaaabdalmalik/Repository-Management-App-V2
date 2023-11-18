@@ -13,6 +13,8 @@ abstract class ProductRemoteDataSource {
 
   Future<ProductModel> getProduct({required int id});
 
+  Future<Unit> createProduct({required ProductModel productModel, File? photo});
+
   Future<Unit> updateProduct({required ProductModel productModel, File? photo});
 
   Future<Unit> deleteProduct({required int id});
@@ -70,6 +72,26 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
     } catch (e) {
       Get.find<Logger>().e(
         "End `getProduct` in |ProductRemoteDataSourceImpl| Exception: ${e.runtimeType}",
+      );
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Unit> createProduct({required ProductModel productModel, File? photo}) async {
+    try {
+      Get.find<Logger>().i("Start `createProduct` in |ProductRemoteDataSourceImpl|");
+      await apiService.postMultiPart(
+        subUrl: AppApiRoutes.addProduct,
+        data: productModel.toJson(),
+        file: photo,
+        fieldFileKey: 'photo',
+      );
+      Get.find<Logger>().f("End `createProduct` in |ProductRemoteDataSourceImpl|");
+      return Future.value(unit);
+    } catch (e) {
+      Get.find<Logger>().e(
+        "End `createProduct` in |ProductRemoteDataSourceImpl| Exception: ${e.runtimeType}",
       );
       rethrow;
     }

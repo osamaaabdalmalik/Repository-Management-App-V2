@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:rms/features/product/data/data_sources/product_remote_data_source.dart';
 import 'package:rms/features/product/data/repository/product_repo_impl.dart';
 import 'package:rms/features/product/domain/repository/product_repo.dart';
+import 'package:rms/features/product/domain/usecases/create_product_use_case.dart';
 import 'package:rms/features/product/domain/usecases/delete_product_register_use_case.dart';
 import 'package:rms/features/product/domain/usecases/delete_product_use_case.dart';
 import 'package:rms/features/product/domain/usecases/get_product_registers_use_case.dart';
@@ -22,6 +23,7 @@ class ProductBindings extends Bindings {
     Get.put(GetProductsUseCase(Get.find()));
     Get.put(GetProductUseCase(Get.find()));
     Get.put(GetProductRegistersUseCase(Get.find()));
+    Get.put(CreateProductUseCase(Get.find()));
     Get.put(UpdateProductUseCase(Get.find()));
     Get.put(DeleteProductUseCase(Get.find()));
     Get.put(DeleteProductRegisterUseCase(Get.find()));
