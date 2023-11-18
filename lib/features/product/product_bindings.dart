@@ -9,7 +9,7 @@ import 'package:rms/features/product/domain/usecases/get_product_use_case.dart';
 import 'package:rms/features/product/domain/usecases/get_products_use_case.dart';
 import 'package:rms/features/product/domain/usecases/update_product_use_case.dart';
 
-class AuthBindings extends Bindings {
+class ProductBindings extends Bindings {
   @override
   dependencies() async {
     Get.put<ProductRemoteDataSource>(
