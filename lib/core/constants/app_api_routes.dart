@@ -78,13 +78,13 @@ abstract class AppApiRoutes {
   static const String deleteExpenseRegister = "/expense/delete_expense_register";
 
   // Money box Registers
-  static const String getPushOrPullRegisters = "/register/get_push_or_pull_registers";
-  static const String addOrRemoveCash = "/register/add_or_remove_cash";
-  static const String updateRegister = "/register/update_register";
-  static const String deleteRegister = "/register/delete_register";
-  static const String getTotalBox = "/register/get_box";
-  static const String getRegisterRegisters = "/register/get_register_registers";
-  static const String deleteRegisterRegister = "/register/delete_register_register";
+  static const String getMoneyBoxOperations = "/register/get_push_or_pull_registers";
+  static const String createMoneyBoxOperation = "/register/add_or_remove_cash";
+  static const String updateMoneyBoxOperation = "/register/update_register";
+  static const String deleteMoneyBoxOperation = "/register/delete_register";
+  static const String getTotalMoneyBox = "/register/get_box";
+  static const String getMoneyBoxOperationRegisters = "/register/get_register_registers";
+  static const String deleteMoneyBoxOperationRegister = "/register/delete_register_register";
 
 
   // Purchases Invoice
