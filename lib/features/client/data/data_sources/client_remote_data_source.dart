@@ -267,7 +267,7 @@ class ClientRemoteDataSourceImpl extends ClientRemoteDataSource {
       return Future.value(unit);
     } catch (e) {
       Get.find<Logger>().e(
-        "End `addClientToArchive` increateClientToArchivesourceImpl| Exception: ${e.runtimeType}",
+        "End `addClientToArchive` in |ClientRemoteDataSourceImpl| Exception: ${e.runtimeType}",
       );
       rethrow;
     }
